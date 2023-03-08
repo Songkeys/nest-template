@@ -5,11 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     ports:
       - 3000:3000
     depends_on:
       - postgres
       - redis
+    environment:
+      - DB_HOST=postgres
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/postgres
+      - REDIS_URL=redis://redis:6379
     env_file:
       - .env
 
@@ -23,6 +28,7 @@ services:
       - .env
     volumes:
       - postgres:/var/lib/postgresql/data
+
   redis:
     image: redis:latest
     container_name: redis
