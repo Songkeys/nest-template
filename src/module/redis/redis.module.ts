@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
-import { RedisModule as RedisModule_ } from '@liaoliaots/nestjs-redis'
+import { RedisModule as RedisModule_ } from '@songkeys/nestjs-redis'
 import { ConfigService } from '@nestjs/config'
 
-// https://github.com/liaoliaots/nestjs-redis/blob/main/docs/latest/redis.md
+// https://github.com/songkeys/nestjs-redis/blob/main/docs/latest/redis.md
 
 @Module({
   imports: [

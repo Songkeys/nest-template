@@ -1,9 +1,11 @@
 import { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
-import { PrismaService } from '@/module/prisma/prisma.service'
+import { PrismaService } from 'nestjs-prisma'
 import compression from '@fastify/compress'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { PrismaClientExceptionFilter } from 'nestjs-prisma'
+import { HttpAdapterHost } from '@nestjs/core'
 
 export async function configure(
   app: NestFastifyApplication,
@@ -11,9 +13,26 @@ export async function configure(
   // logger
   const logger = app.get(Logger)
   app.useLogger(logger)
+  app.useGlobalInterceptors(new LoggerErrorInterceptor())
   logger.debug('loaded: Logger')
 
-  app.useGlobalInterceptors(new LoggerErrorInterceptor())
+  // prisma
+  const prismaService: PrismaService = app.get(PrismaService)
+  // @ts-ignore
+  prismaService.$on('query', async (e: any) => {
+    let queryString = e.query
+    JSON.parse(e.params).forEach((param, index) => {
+      queryString = queryString.replace(
+        `$${index + 1}`,
+        typeof param === 'string' ? `'${param}'` : param,
+      )
+    })
+    logger.debug(queryString)
+  })
+
+  const { httpAdapter } = app.get(HttpAdapterHost)
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter))
+  logger.debug('loaded: PrismaService')
 
   // dto validation
   app.useGlobalPipes(
@@ -44,11 +63,6 @@ export async function configure(
     // customfavIcon: '',
   })
   logger.debug('loaded: SwaggerModule')
-
-  // prisma
-  const prismaService = app.get(PrismaService)
-  await prismaService.enableShutdownHooks(app)
-  logger.debug('loaded: PrismaService')
 
   // cors
   app.enableCors({

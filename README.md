@@ -11,7 +11,7 @@ I found that there are many Nestjs projects in my career, and they are all simil
   - Compression: [@fastify/compress](https://github.com/fastify/fastify-compress)
 - Database:
   - ORM: [Prisma](https://prisma.io)
-  - Cache: [Redis](https://redis.io) [@liaoliaots/nestjs-redis](https://github.com/liaoliaots/nestjs-redis)
+  - Cache: [Redis](https://redis.io) [@songkeys/nestjs-redis](https://github.com/songkeys/nestjs-redis)
 - Logger: [Pino](https://github.com/pinojs/pino)
   - [nestjs-pino](https://github.com/iamolegga/nestjs-pino)
   - [pino-pretty](https://github.com/pinojs/pino-pretty) in development

@@ -1,6 +1,6 @@
 import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common'
 import { ApiExcludeController } from '@nestjs/swagger'
-import { PrismaService } from '@/module/prisma/prisma.service'
+import { PrismaService } from 'nestjs-prisma'
 
 @Controller({
   path: 'prisma',
