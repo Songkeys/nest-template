@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, VERSION_NEUTRAL } from '@nestjs/common'
+import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { PingService } from './ping.service'
 

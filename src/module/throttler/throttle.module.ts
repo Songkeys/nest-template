@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { ThrottlerModule as ThrottlerModule_ } from '@nestjs/throttler'
+import { ThrottlerModule as ThrottlerModule_, minutes } from '@nestjs/throttler'
 import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis'
 
 // https://github.com/nestjs/throttler
@@ -11,10 +11,14 @@ import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis'
       inject: [ConfigService],
       useFactory(configService: ConfigService) {
         return {
-          ttl: 60,
-          limit: 1000,
+          throttlers: [
+            {
+              ttl: minutes(1),
+              limit: 1000,
+            },
+          ],
           storage: new ThrottlerStorageRedisService(
-            configService.get('REDIS_HOST'),
+            configService.get('REDIS_URL'),
           ),
         }
       },

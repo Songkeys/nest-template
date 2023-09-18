@@ -18,7 +18,6 @@ export async function configure(
 
   // prisma
   const prismaService: PrismaService = app.get(PrismaService)
-  // @ts-ignore
   prismaService.$on('query', async (e: any) => {
     let queryString = e.query
     JSON.parse(e.params).forEach((param, index) => {

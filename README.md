@@ -7,7 +7,7 @@ I found that there are many Nestjs projects in my career, and they are all simil
 ## Features
 
 - Platform: [Fastify](https://fastify.io)
-  - CORS
+  - CORS [@fastify/cors](https://github.com/fastify/fastify-cors)
   - Compression: [@fastify/compress](https://github.com/fastify/fastify-compress)
 - Database:
   - ORM: [Prisma](https://prisma.io)
