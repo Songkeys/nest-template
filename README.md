@@ -4,6 +4,13 @@ This is an opinionated template for Nestjs projects.
 
 I found that there are many Nestjs projects in my career, and they are all similar in structure. So I created this template to make it easier to start a new Nestjs project.
 
+Philosophy:
+
+- Keep it simple and stupid.
+- Keep it fast and efficient.
+- Keep it scalable and maintainable.
+- Keep it secure.
+
 ## Features
 
 - Platform: [Fastify](https://fastify.io)
@@ -14,13 +21,15 @@ I found that there are many Nestjs projects in my career, and they are all simil
   - Cache: [Redis](https://redis.io) [@songkeys/nestjs-redis](https://github.com/songkeys/nestjs-redis)
 - Logger: [Pino](https://github.com/pinojs/pino)
   - [nestjs-pino](https://github.com/iamolegga/nestjs-pino)
-  - [pino-pretty](https://github.com/pinojs/pino-pretty) in development
+  - [pino-http](https://github.com/pinojs/pino-http)
+  - [pino-http-print](https://github.com/pinojs/pino-http-print)
   - [pino-sentry-transport](https://github.com/tomer-yechiel/pino-sentry-transport)
 - Swagger: [@nestjs/swagger](https://github.com/nestjs/swagger)
   - with nest-cli plugin enabled
 - Throttler: [@nestjs/throttler](https://github.com/nestjs/throttler)
-  - with Redis cache: [nestjs-throttler-storage-redis](https://github.com/kkoomen/nestjs-throttler-storage-redis)
+  - with Redis cache: [@nest-lab/throttler-storage-redis](https://github.com/jmcdo29/nest-lab/tree/main/packages/throttler-storage-redis)
 - Testing: removed! (Sorry, I don't write tests. 😅)
+- Format, Lint: [Biome](https://biomejs.dev)
 
 ## Guide
 
@@ -35,31 +44,31 @@ cp .env.example .env
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Start DB docker:
 
 ```bash
-npm run docker:db
+pnpm run docker:db
 ```
 
 Generate Prisma client:
 
 ```bash
-npm run prisma:generate
+pnpm run prisma:generate
 ```
 
 Migrate database:
 
 ```bash
-npm run prisma:migrate:dev
+pnpm run prisma:migrate:dev
 ```
 
 Run the app:
 
 ```bash
-npm run start:dev
+pnpm run start:dev
 ```
 
 ### Deployment
@@ -70,19 +79,19 @@ Docker:
 # building new NestJS docker image
 docker-compose build
 # or
-npm run docker:build
+pnpm run docker:build
 
 # start docker-compose
 docker-compose up -d
 # or
-npm run docker
+pnpm run docker
 ```
 
 In Node.js Environment:
 
 ```
-npm install
-npm run build
+pnpm install
+pnpm run build
 ./start_prod.sh
 ```
 
@@ -91,11 +100,11 @@ npm run build
 Development:
 
 ```bash
-npm run prisma:migrate:dev
+pnpm run prisma:migrate:dev
 ```
 
 Production:
 
 ```bash
-npm run prisma:migrate:deploy
+pnpm run prisma:migrate:deploy
 ```

@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class PingService {
-  async ping() {
-    return 'pong'
-  }
+	async ping() {
+		return "pong";
+	}
 }
