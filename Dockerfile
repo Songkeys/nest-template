@@ -13,6 +13,9 @@ RUN pnpm run build
 
 FROM node:22
 
+ENV NODE_ENV production
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
 COPY --from=builder /app /app
 WORKDIR /app
 
